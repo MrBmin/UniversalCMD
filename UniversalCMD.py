@@ -1,9 +1,14 @@
+# add date (-change) time (-change)
 import os
 import re
+import stri
+import inspect
+import customcmd as cus
+
 de = "0"
-v = "0.0.1 PRE-ALPHA 04/Jan/2026"
-c = "CHANGELOG\n0.0.1 PRE-ALPHA 03/Jan/2026\n\nFEATURES\n\n- Commands\n- The help list\n- The changelog"
-help = "help - Displays this menu\nexit - What do you think this does?\nchange or changelog - Displays the changelog\ncd [path] - Changes the working directory to the specified path\ndebug [on/off] - Enables/disables viewing of extra debug info (intended for dev use, but it's viewable to anyone at the moment)\ndir ([path])- Without any arguments, displays the contents of the current directory, if a valid argument is provided, the contents of the argument will be provided"
+v = "0.0.2 PRE-ALPHA 04/Jan/2026"
+c = "CHANGELOG\n0.0.2 PRE-ALPHA 06/Jan/2026\n\nFEATURES\n-calc command\ncustom and py commands (instructions on how to make a custom command is in <customcmd.py> file.)\n\nBUGFIXES\n-Fixed exit command"
+help = "help - Displays this menu\nexit - What do you think this does?\nchange or changelog - Displays the changelog\ncd [path] - Changes the working directory to the specified path\ndebug [on/off] - Enables/disables viewing of extra debug info (intended for dev use, but it's viewable to anyone at the moment)\ndir ([path])- Without any arguments, displays the contents of the current directory, if a valid argument is provided, the contents of the argument will be provided\ncalc [-add/-sub/-mult/-div] [At least 2 numbers] - Performs the requested operation on the numbers provided\ntest [wip command] - Executes the W.I.P command specified, purely intended for dev, if a string is specified, it will output a modified string\npy [python code] - Executes the python code specified, if it's valid, use \"\\n\" for new lines\ncustom [custom command] - Executes the custom command, defined in the <customcmd.py> file, instruction on how to make a custom command are commented in customcmd.py"
 temp0 = None
 def take():
     global de    
@@ -13,15 +18,46 @@ def take():
     cmd0 = cmd.split(" ")[0]
     if len(cmd.split(" "))>=2 :
         cmd1 = cmd.split(" ")[1]
-    else:
-        cmd1 = None
+    if len(cmd.split(" "))>=3 :
+        cmd2 = cmd.split(" ")[2]
+    if len(cmd.split(" "))>=4 :
+        cmd3 = cmd.split(" ")[3]
     if de=="1":
         print(f"Command breakdown\nTrigger : '{cmd0}'\nArguments:'{cmd.split(" ")[1:]}'")
+    if f"{cmd0}"=="test":
+        print(stri.sh(cmd1))
+        take()
+    if f"{cmd0}"=="py":
+        cmd1 = " ".join(cmd.split(" ")[1:]).replace("\\n", "\n")
+        try:
+            exec(cmd1)
+        except BaseException as err:
+            print(f"Invalid code: {err}")
+        take()
+    if f"{cmd0}"=="custom":
+        print("I cannot confirm that this command is safe, make sure the command you're running will not damage anything, continue? (y/n): ", end="")
+        t = input()
+        print()
+        if f"{t}"=="y":
+            try:
+                arg = inspect.signature(getattr(cus, f"{cmd1}")).parameters
+                if len(arg)==0:
+                    getattr(cus, f"{cmd1}")()
+                if len(arg)==1:
+                    getattr(cus, f"{cmd1}")(cmd2)
+                if len(arg)==2:
+                    getattr(cus, f"{cmd1}")(cmd2, cmd3)
+            except BaseException as err:
+                print(f"Couldn't execute command: {err}")
+        else:
+            print("Couldn't execute command!")
+            take()
+        take()
     if f"{cmd}"=="help":
         print(help)
         take()
     if f"{cmd}"=="exit":
-        return
+        os._exit(0)
     if f"{cmd}"=="change" or f"{cmd}"=="changelog":
         print(c)
         take()
@@ -81,6 +117,41 @@ def take():
             print(f"{fileList[i]}", end="  ")
         print(f"Found {len(fileList) + len(folderList)} objects, {len(fileList)} files, and {len(folderList)} folders.\nBy the way, anything with a dot counts as a folder, so the numbers may be wrong!")            
         take()
+    if f"{cmd0}"=="calc":
+        if not cmd3:
+            print(f"calc takes 3 arguments, can't execute command!")
+            take()
+        if cmd1=="-add":
+            try:
+                print(float(cmd2) + float(cmd3))
+                take()
+            except:
+                print("One or more number arguments were not numbers!")
+                take()
+        if cmd1=="-sub":
+            try:
+                print(float(cmd2) - float(cmd3))
+                take()
+            except:
+                print("One or more number arguments were not numbers!")
+                take()
+        if cmd1=="-mult":
+            try:
+                print(float(cmd2) * float(cmd3))
+                take()
+            except:
+                print("One or more number arguments were not numbers!")
+                take()
+        if cmd1=="-div":
+            if cmd3=="0":
+                print("Attempted division by 0!")
+                take()
+            try:
+                print(float(cmd2) / float(cmd3))
+                take()
+            except:
+                print("One or more number arguments were not numbers!")
+                take()                  
     print(f"\nThe command '{cmd0}' wasn't recongnised, did you make it lowercase?")
     take()
 def start():
