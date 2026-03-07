@@ -1,19 +1,62 @@
+#
+#Hey!
+#I see you saw the text at the start and wanted to look through my code!
+#
+#Just a quick warning, this code is probably going to be of horrid quality,
+#but remember, this is my first big Python project, my first real, public one,
+#my first time actively using GitHub, and I'm a slow learner!
+#
+#So if you have any constructive feedback or want to enhance my code in any
+#way whatsoever, just report it as an issue on the UniversalCMD repo, then
+#I'll 101% see it
+#
+#(You may have already seen this in UniversalCMD, but the start of the code
+#has - could be scrapped - spoilers for future updates, so skip until
+#the "import" train the start of the actual code)
+
 # add date (-change) time (-change)
 import os
 import re
 import stri
 import inspect
 import customcmd as cus
+import json
+import datetime
+import random
+#import batch
+
+#you probably cant decipher what this is supposed to do but please still ignore it
+
+#try:
+#    with open("jsons\\firstBoot.json", "r") as f:
+#        fp = json.load(f)
+#        if fp.get("value") == True:
+#            print(fp.get("displayMessage", "Could not fetch value <displayMessage> from <jsons\\firstBoot.json>, have you been messing with files?"), end="")
+#            e2u = input()
+#            if e2u not in ("y", "n"):
+#                print("Neither y or n were specified, defaulting to off...")
+#                e2u = "n"
+#            with open("jsons\\options.json", "r") as g:
+#                temp1 = open("jsons\\options.json").read()
+#                temp1.replace('"e2u": False', '"e2u": True')
+#                with open("jsons\\options.json", "w") as gp:
+#                    json.dump(json.load(g), temp1, indent=2)            
+#        fp["value"] = False
+#        f.seek(0)
+#    with open("jsons\\firstBoot.json", "w") as fpp:
+#        json.dump(fp, fpp, indent=2)
+#except:
+#    print("\nSorry, the block of code running now has been worked on for about an hour, so it is really buggy, and it crashed!\nDon't worry, it's not anything too important to the rest of UniversalCMD!")
+#    input()
 
 de = "0"
-v = "0.0.2 PRE-ALPHA 04/Jan/2026"
-c = "CHANGELOG\n0.0.2 PRE-ALPHA 06/Jan/2026\n\nFEATURES\n-calc command\ncustom and py commands (instructions on how to make a custom command is in <customcmd.py> file.)\n\nBUGFIXES\n-Fixed exit command"
-help = "help - Displays this menu\nexit - What do you think this does?\nchange or changelog - Displays the changelog\ncd [path] - Changes the working directory to the specified path\ndebug [on/off] - Enables/disables viewing of extra debug info (intended for dev use, but it's viewable to anyone at the moment)\ndir ([path])- Without any arguments, displays the contents of the current directory, if a valid argument is provided, the contents of the argument will be provided\ncalc [-add/-sub/-mult/-div] [At least 2 numbers] - Performs the requested operation on the numbers provided\ntest [wip command] - Executes the W.I.P command specified, purely intended for dev, if a string is specified, it will output a modified string\npy [python code] - Executes the python code specified, if it's valid, use \"\\n\" for new lines\ncustom [custom command] - Executes the custom command, defined in the <customcmd.py> file, instruction on how to make a custom command are commented in customcmd.py"
+v = "1.0.3 PRE-ALPHA 07/Mar/2026"
+help = "demo - This is an in-dev version of UniversalCMD, this command runs the latest major release (e.g. Alpha 1.0) of UniversalCMD (NONE YET)\nhelp - Displays this menu\nexit - What do you think this does?\nchange or changelog - Displays the changelog\ncd [path] - Changes the working directory to the specified path\ndebug [on/off] - Enables/disables viewing of extra debug info (intended for dev use, but it's viewable to anyone at the moment)\ndir ([path])- Without any arguments, displays the contents of the current directory, if a valid argument is provided, the contents of the argument will be provided\ncalc [-add/-sub/-mult/-div] [At least 2 numbers] - Performs the requested operation on the numbers provided\ntest [wip command] - Executes the W.I.P command specified, purely intended for dev, if a string is specified, it will output a modified string\npy [python code] - Executes the python code specified, if it's valid, use \"\\n\" for new lines\ncustom [custom command] - Executes the custom command, defined in the <customcmd.py> file, instruction on how to make a custom command are commented in customcmd.py\n(de)cipher [text] ([date for decipherer]) - Ciphers text through about 5 levels of encryption, supports some non-alphanumeric symbols, decipherer requires the key and the date on which the input was ciphered (FYI this is just copied code from another project I was working on for like 3 days so it may be buggy/not fit in)\nbat - Currently in-dev, doesn't work, a bit of it will be released in pre-a v1.0.3a for public testing\ne2u - Another command that is still in active development, this is a massive feature that will probably release with pre-alpha v1.1.0 or the first alpha version."
 temp0 = None
 def take():
     global de    
     print("", end="\n")
-    print(os.getcwd() + ">", end="")
+    print("UCMD " + os.getcwd() + ">", end="")
     cmd = input()
     cmd0 = cmd.split(" ")[0]
     if len(cmd.split(" "))>=2 :
@@ -24,34 +67,93 @@ def take():
         cmd3 = cmd.split(" ")[3]
     if de=="1":
         print(f"Command breakdown\nTrigger : '{cmd0}'\nArguments:'{cmd.split(" ")[1:]}'")
-    if f"{cmd0}"=="test":
-        print(stri.sh(cmd1))
+    if f"{cmd0}"=="e2u":
+        print("This feature is still being worked on, this feature will release with either pre-alpha v1.1.0, or the first alpha version")
         take()
-    if f"{cmd0}"=="py":
-        cmd1 = " ".join(cmd.split(" ")[1:]).replace("\\n", "\n")
-        try:
-            exec(cmd1)
-        except BaseException as err:
-            print(f"Invalid code: {err}")
+    if f"{cmd0}"=="bat":
+        # batch.run(cmd.removeprefix(f"{cmd0} "))
+        print("This command is still being worked on, some parts will be released in pre-a v1.0.3a, 1.0.3b etc., the full release of this command will be in pre-a v1.1.0")
         take()
-    if f"{cmd0}"=="custom":
-        print("I cannot confirm that this command is safe, make sure the command you're running will not damage anything, continue? (y/n): ", end="")
-        t = input()
-        print()
-        if f"{t}"=="y":
-            try:
-                arg = inspect.signature(getattr(cus, f"{cmd1}")).parameters
-                if len(arg)==0:
-                    getattr(cus, f"{cmd1}")()
-                if len(arg)==1:
-                    getattr(cus, f"{cmd1}")(cmd2)
-                if len(arg)==2:
-                    getattr(cus, f"{cmd1}")(cmd2, cmd3)
-            except BaseException as err:
-                print(f"Couldn't execute command: {err}")
+    if f"{cmd0}"=="cipher":
+        if not len(cmd.split(" "))>=2 :
+            print("cipher takes 1 argument!")
         else:
-            print("Couldn't execute command!")
+            inp = cmd.removeprefix("cipher ")
+            features = 5
+            alphanumerics = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+            valids = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", " ", "!", "\"", "£", "$", "€", "%", "^", "&", "*", "(", ")", "`", "¬", "¦", "\\", "|", "-", "_", "+", "=", "[", "{", "}", "]", ";", ":", "@", "'", "#", "~", ",", "<", ".", ">", "/", "?"]
+            key = alphanumerics[random.randint(0, 35)]
+            for i in range(features - 1):
+                if i == 0:
+                    key += alphanumerics[random.randint(5, 35)]
+                elif i == 1:
+                    key += alphanumerics[random.randint(0, 35)]
+                    if key[1] == key[0]:
+                        key[1] = 0
+                key += alphanumerics[random.randint(0, 35)]
+            out = ""
+            for c in inp:
+                print(f"Translating \"{c}\"")    
+                try:
+                    char = c.upper()
+                    ind = valids.index(char)
+                    ind += alphanumerics.index(key[0])
+                    ind -= alphanumerics.index(key[1])
+                    if i % 2 == 0:
+                        ind += alphanumerics.index(key[2])
+                        ind -= alphanumerics.index(key[3])
+                        ind += datetime.datetime(year=datetime.datetime.now().year, day=datetime.datetime.now().day, month=datetime.datetime.now().month).timetuple().tm_yday
+                        ind %= len(valids)
+                except BaseException as er:
+                    out += c
+                    print(f"DEBUG {er}")  
+                out += valids[ind]
+# alphanumerics.index(key[0])
+            print(f"\nHere's the ciphered text:\n{out}\nKey: `{key}`\nCiphered on: {"%02d" % datetime.datetime.now().day}/{"%02d" % datetime.datetime.now().month}/{datetime.datetime.now().year}, remember that if you want to decipher this!")
             take()
+        if f"{cmd0}"=="test":
+            print(stri.sh(cmd1))
+            take()
+        if f"{cmd0}"=="py":
+            cmd1 = " ".join(cmd.split(" ")[1:]).replace("\\n", "\n")
+            try:
+                exec(cmd1)
+            except BaseException as err:
+                print(f"Invalid code: {err}")
+            take()
+    if f"{cmd0}"=="custom":
+        with open("customcmd.py", "r") as f:
+            if "import os" in f:
+                print("WARNING: The custom command source, <customcmd.py>, uses the OS module, running a custom command may not be safe, are you sure you want to continue? >")
+                t = input()
+                print()
+                if f"{t}"=="y":
+                    try:
+                       arg = inspect.signature(getattr(cus, f"{cmd1}")).parameters
+                       if len(arg)==0:
+                            getattr(cus, f"{cmd1}")()
+                       if len(arg)==1:
+                            getattr(cus, f"{cmd1}")(cmd2)
+                       if len(arg)==2:
+                            getattr(cus, f"{cmd1}")(cmd2, cmd3)
+                    except BaseException as err:
+                        print(f"Couldn't execute command: {err}")
+                else:
+                    print("Couldn't execute command: OS module not allowed by user")
+                    take()
+                try:
+                    arg = inspect.signature(getattr(cus, f"{cmd1}")).parameters
+                    if len(arg)==0:
+                        getattr(cus, f"{cmd1}")()
+                        take()
+                    if len(arg)==1:
+                        getattr(cus, f"{cmd1}")(cmd2)
+                        take()
+                    if len(arg)==2:
+                        getattr(cus, f"{cmd1}")(cmd2, cmd3)
+                        take()
+                except BaseException as err:
+                    print(f"Couldn't execute command: {err}")
         take()
     if f"{cmd}"=="help":
         print(help)
@@ -59,10 +161,10 @@ def take():
     if f"{cmd}"=="exit":
         os._exit(0)
     if f"{cmd}"=="change" or f"{cmd}"=="changelog":
-        print(c)
+        print(f"CHANGELOG\n{v}\n\nFEATURES\n-Tweaked the custom command to only warn you if it uses the OS module (This isn't working at the moment and instead just doesn't run if it detects the OS module for some reason, if you're seeing this, sorry!)\n-Subtly changed the version numbering to start at 1.0 instead of 0.0\n-Changed the command input line to say UCMD at the start, taking inspiration from PowerShell (and also to make sure I stop mixing up UniversalCMD with PowerShell during testing)\n\nBUGFIXES\n-Not really a bug, but made it so the version numbers are all synced\n-(Hopefully) fixed the bug where if you don't provide the correct number of arguments, UniversalCMD crashes")
         take()
     if f"{cmd0}"=="cd":
-        if not cmd1:
+        if not len(cmd.split(" "))>=2 :
             print(f"cd takes 1 argument, can't execute command!")
             take()
         if os.path.exists(cmd1):
@@ -71,11 +173,16 @@ def take():
             print(f"The directory provided, '{cmd1}', wasn't found!")
         take()
     if f"{cmd0}"=="debug":
-        if not cmd1:
+        if not len(cmd.split(" "))>=2 :
             print(f"debug takes 1 argument, can't execute command!")
             take()
         if f"{cmd1}"=="on":
             de="1"
+            with open("jsons\\options.json", "w") as f:
+                for line in f:
+                    if "debug" in line:
+                        temp2 = f.read().replace("\"debug\": true", "\"debug\": false")
+                        f.write(temp2)
         else:
             de="0"
         print(de)
@@ -84,7 +191,7 @@ def take():
         fileList = list()
         folderList = list()
         print("[Folder]  File\n")
-        if not cmd1:
+        if not len(cmd.split(" "))>=2 :
             target = os.getcwd()
             for i in range(0, len(os.listdir(target))):
                 if not os.listdir(target)[i].find(".")==-1:
@@ -115,7 +222,7 @@ def take():
             if i%10==1:
                 print(f"{fileList[i]}")
             print(f"{fileList[i]}", end="  ")
-        print(f"Found {len(fileList) + len(folderList)} objects, {len(fileList)} files, and {len(folderList)} folders.\nBy the way, anything with a dot counts as a folder, so the numbers may be wrong!")            
+        print(f"\nFound {len(fileList) + len(folderList)} objects, {len(fileList)} files, and {len(folderList)} folders.\nBy the way, anything with a dot counts as a folder, so the numbers may be wrong!")            
         take()
     if f"{cmd0}"=="calc":
         if not cmd3:
@@ -155,10 +262,14 @@ def take():
     print(f"\nThe command '{cmd0}' wasn't recongnised, did you make it lowercase?")
     take()
 def start():
-    print(f"\nVersion {v}\nWARNING: Unstable build of UniversalCMD, expect bugs!\nThis is an open-source project, so you can take a look at my horrible code on GitHub!\n\nhelp for list of commands, all built-in commands are case-sensitive!");
+    print(f"\nVersion {v}\nI have no way of stopping you, but please, do not copy parts of UniversalCMD's code and label it as your own!!\nThis is an open-source project, so you can take a look at my horrible code on GitHub!\n[The comments near the start of the code may contain - unconfirmed - spoilers for future updates, so be careful!]\n\nhelp for list of commands, all built-in commands are case-sensitive!");
     take()
 
 start()
 
-print("\n\nAn unknown error has occured, and a core loop stopped functioning, please report what you were doing leading up to this error to GitHub!!\n")
+print(f"\n\nAn unknown error has occured, and a core loop stopped functioning, please report what you were doing leading up to this error to GitHub!! (Especially since I have not encountered this error whatsoever in the testing of pre-alpha v1.0.3)\n")
 start()
+
+#fun fact:
+#
+#v1.0.3 pre-alpha's release was delayed by about 10 minutes due to 2FA issues
