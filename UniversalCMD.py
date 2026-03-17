@@ -29,7 +29,7 @@ import customcmd as cus
 import json
 import datetime
 import random
-import batch
+#import batch
 
 print("Loading style...")
 print(colorama.Back.BLACK)
