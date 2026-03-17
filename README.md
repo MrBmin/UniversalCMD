@@ -1,4 +1,4 @@
-# UniversalCMD PRE-ALPHA 1.0.3
+# UniversalCMD PRE-ALPHA 1.0.3a
 *STILL W.I.P, CURRENT MAJOR VERSION IS PRE-ALPHA 1.0*
 
 UniversalCMD is a Python re-creation of the Windows command prompt, that works on all platforms (that is, ones that can run Python lol)!
