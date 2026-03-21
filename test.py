@@ -1,1 +1,1 @@
-print(inp)
+print(f"You typed {cmd1}")
