@@ -1,2 +1,1 @@
-def exe(inp:str):
-    print(inp)
+print(inp)
