@@ -5,7 +5,7 @@ try:
         print(math.sqrt(int(cmd2)))
      #exponentiation (extmath -exp a b = a^b)
     if cmd1 == "-exp":
-        print(math.exp(int(cmd1)))
+        print(math.exp(int(cmd2)))
     if cmd1 == "-?":
         print("extmath -sqrt a - Returns the square root of a\nextmath -exp a - Returns Euler's Number (~2.718) raised to the power of a\nextmath -ctn a - Counts to a (e.g. extmath -ctn 5 outputs 1, 2, 3, 4, 5)")
 
