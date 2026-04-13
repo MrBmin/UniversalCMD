@@ -24,7 +24,9 @@ except BaseException as err:
     print(err)
     print(colorama.Back.RED, f"A fatal error has occurred! ")    
     print(colorama.Back.RED, f"                                                  ")    
-    print(colorama.Back.RED, f"The crash handler was not found or is corrupted!  ")
+    print(colorama.Back.RED, f"The crash handler could not be initalised!        ")
+    print(colorama.Back.RED, f"It may have either been moved, deleted,           ")
+    print(colorama.Back.RED, f"or corrupted.                                     ")
     print(colorama.Back.RED, f"                                                  ")
     print(colorama.Back.RED, f"Please report this in the UniversalCMD repo!      ")
     print(colorama.Back.RED, f"Code: HANDLER_NOT_FOUND                           ")
@@ -51,15 +53,14 @@ except:
 import json
 import datetime
 import random
-import batch
 import installer
 
-print("Loading style...")
-print(colorama.Back.BLACK)
+
 
 try:
 
-   
+    print("Loading style...")
+    print(colorama.Back.BLACK)
     # add date (-change) time (-change)
     
     #you probably cant decipher what this is supposed to do but please still ignore it
@@ -87,8 +88,8 @@ try:
     #    input()
     
     de = "0"
-    v = "1.0.3b PRE-ALPHA 22/Mar/2026"
-    help = "install [optional-feature / -? / -remove] - Installs the specified optional feature, requires an internet connection. Type install -? to get a list of optional features and how to use them once they're installed. Type install -remove [installed-feature] to uninstall an already installed optional feature\nhelp - Displays this menu\nexit - What do you think this does?\nchange or changelog - Displays the changelog\ncd [path] - Changes the working directory to the specified path\ndebug [on/off] - Enables/disables viewing of extra debug info (intended for dev use, but it's viewable to anyone at the moment)\ndir ([path])- Without any arguments, displays the contents of the current directory, if a valid argument is provided, the contents of the argument will be provided\ncalc [-add/-sub/-mult/-div] [At least 2 numbers] - Performs the requested operation on the numbers provided\ntest [wip command] - Executes the W.I.P command specified, purely intended for dev, if a string is specified, it will output a modified string\npy [python code] - Executes the python code specified, if it's valid, use \"\\n\" for new lines\ncustom [custom command] - Executes the custom command, defined in the <customcmd.py> file, instruction on how to make a custom command are commented in customcmd.py\n(de)cipher [text] ([date for decipherer]) - Ciphers text through about 5 levels of encryption, supports some non-alphanumeric symbols, decipherer requires the key and the date on which the input was ciphered (FYI this is just copied code from another project I was working on for like 3 days so it may be buggy/not fit in)\nbat - Currently in-dev, doesn't work, a bit of it will be released in pre-a v1.0.3a for public testing\ne2u - Another command that is still in active development, this is a massive feature that will probably release with pre-alpha v1.1.0 or the first alpha version.\ninvoke [code] - Invokes a crash with the specified code (purely intended for testing error handling [NOT SUPPOSED TO MAKE IT TO PRE-A V1.1.0])\ntext [file.txt] - If the specified file exists, modify it, otherwise create it"
+    v = "1.1.0 PRE-ALPHA 13/Apr/2026"
+    help = "install [optional-feature / -? / -remove] - Installs the specified optional feature, requires an internet connection. Type install -? to get a list of optional features and how to use them once they're installed. Type install -remove [installed-feature] to uninstall an already installed optional feature\nhelp - Displays this menu\nexit - What do you think this does?\nchange or changelog - Displays the changelog\ncd [path] - Changes the working directory to the specified path\ndebug [on/off] - Enables/disables viewing of extra debug info (intended for dev use, but it's viewable to anyone at the moment)\ndir ([path])- Without any arguments, displays the contents of the current directory, if a valid argument is provided, the contents of the argument will be provided\ncalc [-add/-sub/-mult/-div] [At least 2 numbers] - Performs the requested operation on the numbers provided\ntest [wip command] - Executes the W.I.P command specified, purely intended for dev, if a string is specified, it will output a modified string\npy [python code] - Executes the python code specified, if it's valid, use \"\\n\" for new lines\ncustom [custom command] - Executes the custom command, defined in the <customcmd.py> file, instruction on how to make a custom command are commented in customcmd.py\n(de)cipher [text] ([date for decipherer]) - Ciphers text through about 5 levels of encryption, supports some non-alphanumeric symbols, decipherer requires the key and the date on which the input was ciphered (FYI this is just copied code from another project I was working on for like 3 days so it may be buggy/not fit in)\ninvoke [code] - Invokes a crash with the specified code (purely intended for testing error handling [NOT SUPPOSED TO MAKE IT TO PRE-A V1.1.0])\ntext [file.txt] - If the specified file exists, modify it, otherwise create it"
     ue = "UniversalCMD.py"
     temp0 = None
     def take():
@@ -118,7 +119,7 @@ try:
             ue = "installer.py"
             if cmd1 == "-?":
                 print(f"To install, type install, then one of the feature names below\nOnce a feature has been installed, it will be integrated as an actual command\n(e.g. install xyz, then type xyz to use the feature)")
-                print(f"\nHere are the list of optional features\n\nextmath [many possible operations] - I'm not listing all of the operations here, so if you really want to know them, run install extmath, then restart UniversalCMD and type extmath -?")
+                print(f"\nHere are the list of optional features\n\ne2u - This isn't a command, but rather a full replacement for UniversalCMD, which is Easier 2 Understand. Refer to this version's readme for more information\nextmath [many possible operations] - I'm not listing all of the operations here, so if you really want to know them, run install extmath, then restart UniversalCMD and type extmath -?")
                 take()
             if cmd1 == "-remove":
                 print("Sorry, I'm a solo developer, and I have a 5-day residental trip with my school the day after tomorrow so I don't have time to vomit out the logic for install -remove (and also I actually want to make y'know, the actual features with only the time tomorrow so I have to focus on that a LOT), but I will after!")
@@ -175,9 +176,6 @@ try:
                 except BaseException as err:
                     print(f"Invalid code: {err}")
                 take()
-        if f"{cmd0}"=="bat" or f"{cmd0}"=="batch":
-            
-            batch.bat(cmd1)
         if f"{cmd0}"=="custom":
             with open("customcmd.py", "r") as f:
                 if "import os" in f:
@@ -321,10 +319,6 @@ try:
     def start():
         print(colorama.Back.BLACK, f"\nVersion {v}\nI have no way of stopping you, but please, do not copy parts of UniversalCMD's code and label it as your own!!\nThis is an open-source project, so you can take a look at my horrible code on GitHub!\n[The comments near the start of the code may contain - unconfirmed - spoilers for future updates, so be careful!]\n\nhelp for list of commands, all built-in commands are case-sensitive!");
         take()
-    
-    start()
-    handler.handle("TAKE_FUNC_EXITED", "Command input has been unexpectedly cut off!", "UniversalCMD.py")
-
 except KeyboardInterrupt:
     handler.handle("CTRL_C_ATTEMPTED", "Ctrl+C attempted!", "UniversalCMD.py and you (no offense)")
 
@@ -333,6 +327,19 @@ except FileNotFoundError:
 
 except BaseException as err:
     handler.handle("UNK_ERR", f"{err}", ue)
+    
+if __name__ == "__main__":
+    start()
+else:
+    print("The file running has attempted to import UniversalCMD, although this is the wrong version!.\n\nThis is UniversalCMD v1.1.0 pre-alpha, I haven't made a library version yet, although at this version's release, it should be under development.")
+    print("This script will now continue as normal, although any UniversalCMD library features won't work.")
+      
+    def cmd():
+        print("This file has attempted to run a UniversalCMD library feature on a version prior to it being added!\nThis file is using UniversalCMD v1.1.0 pre-alpha and has attempted to call UniversalCMD.cmd()")
+
+handler.handle("TAKE_FUNC_EXITED", "Command input has been unexpectedly cut off!", "UniversalCMD.py")
+
+
 
 for i in range(1, 100):    
     print()

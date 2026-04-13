@@ -1,0 +1,12 @@
+{
+    "e2u_bg": "colorama.Back.LIGHTCYAN_EX",
+    "e2u_ws": "colorama.Back.BLUE",
+    "e2u_fg": "colorama.Fore.BLACK",
+    "e2u_wbg": "colorama.Back.LIGHTBLACK_EX",
+    "e2u_tbg": "colorama.Back.BLACK",
+    "e2u_sbg": "colorama.Back.WHITE",
+    "e2u_sfg": "colorama.Fore.BLACK",
+    "e2u_dfg": "colorama.Fore.RED",
+
+    "recursion_depth": 0
+}
