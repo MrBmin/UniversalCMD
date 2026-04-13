@@ -1,5 +1,7 @@
-# UniversalCMD PRE-ALPHA 1.0.3b Optional Features
-*STILL W.I.P, CURRENT MAJOR VERSION IS PRE-ALPHA 1.0*
+# UniversalCMD PRE-ALPHA 1.1.0 Optional Features
+*STILL W.I.P*
 
 These are optional features for UniversalCMD, this branch is not intended to be cloned / downloaded
-as UniversalCMD will download and properly install the features, and turn them in to commands
+as UniversalCMD will download and properly install the features, and turn them in to commands.
+
+Type `install -?` in UniversalCMD for list of optional features.
